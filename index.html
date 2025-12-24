@@ -21,7 +21,7 @@
             --text-light: #64748b;
             --white: #ffffff;
             --bg-light: #f8fafc;
-            --ai-bg: #e0f2f1; /* Light Teal for AI section */
+            --ai-bg: #e0f2f1;
         }
 
         * {
@@ -96,13 +96,14 @@
 
         .nav-links a:hover {
             opacity: 1;
-            color: var(--secondary); /* Teal highlight */
+            color: var(--secondary);
         }
 
         /* --- HERO SECTION --- */
         .hero {
             height: 90vh;
-            background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.6)), url('http://googleusercontent.com/image_collection/image_retrieval/12852909745041318275');
+            /* Fixed: Uses HTTPS Unsplash Image */
+            background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.6)), url('https://images.unsplash.com/photo-1468581264429-2548ef9eb732?auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -175,7 +176,7 @@
             border-radius: 2px;
         }
 
-        /* --- ABOUT (Context) --- */
+        /* --- ABOUT --- */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -250,7 +251,7 @@
         }
 
         .partner-img {
-            height: 180px;
+            height: 200px;
             width: 100%;
             object-fit: cover;
         }
@@ -271,7 +272,7 @@
             text-transform: uppercase;
         }
 
-        /* --- TARGET GROUPS --- */
+        /* --- TARGETS --- */
         .target-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -287,7 +288,7 @@
         }
 
         .target-list li::before {
-            content: '\f058'; /* FontAwesome check-circle */
+            content: '\f058';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
@@ -295,7 +296,7 @@
             color: var(--secondary);
         }
 
-        /* --- TIMELINE (ROADMAP) --- */
+        /* --- TIMELINE --- */
         .roadmap {
             background-color: var(--primary);
             color: var(--white);
@@ -315,7 +316,6 @@
             gap: 20px;
         }
         
-        /* Line connecting dots */
         .timeline-container::before {
             content: '';
             position: absolute;
@@ -325,7 +325,7 @@
             height: 4px;
             background: rgba(255,255,255,0.3);
             z-index: 0;
-            display: none; /* Hidden on mobile by default, showed in query */
+            display: none;
         }
 
         .timeline-box {
@@ -358,7 +358,7 @@
             display: block;
         }
 
-        /* --- MOBILITIES (Detailed) --- */
+        /* --- MOBILITIES --- */
         .mobility-item {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -368,11 +368,11 @@
         }
         
         .mobility-item.reverse {
-            direction: rtl; /* Simple way to swap columns visually */
+            direction: rtl;
         }
         
         .mobility-item.reverse .mobility-text {
-            direction: ltr; /* Reset text direction */
+            direction: ltr;
         }
 
         .mobility-img {
@@ -421,11 +421,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        .result-box h3 {
-            margin-bottom: 20px;
-        }
-
-        /* --- AI SECTION STYLES --- */
+        /* --- AI SECTION --- */
         .ai-section {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2f1 100%);
             border-top: 1px solid #cbd5e1;
@@ -484,11 +480,19 @@
         .btn-ai {
             background: linear-gradient(135deg, var(--primary), #1a5c9e);
             border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
         }
         
         .btn-tip {
             background: linear-gradient(135deg, var(--secondary), #20b2aa);
             border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
         }
 
         .ai-response-area {
@@ -499,7 +503,7 @@
             border: 1px solid #e2e8f0;
             text-align: left;
             min-height: 60px;
-            display: none; /* Hidden by default */
+            display: none;
         }
         
         .ai-response-area.visible {
@@ -521,22 +525,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .loader {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
-            display: none;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
         /* --- FOOTER --- */
         footer {
             background-color: #1e293b;
@@ -547,11 +535,6 @@
         
         .footer-info {
             margin-bottom: 30px;
-        }
-        
-        .footer-info p {
-            margin: 5px 0;
-            font-size: 1.1rem;
         }
 
         .erasmus-note {
@@ -565,16 +548,14 @@
 
         /* --- RESPONSIVE --- */
         @media (min-width: 992px) {
-            .timeline-container::before {
-                display: block;
-            }
+            .timeline-container::before { display: block; }
         }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             .about-grid, .target-layout, .mobility-item, .results-grid { grid-template-columns: 1fr; }
             .mobility-item.reverse { direction: ltr; }
-            .nav-links { display: none; } /* Simplified mobile menu */
+            .nav-links { display: none; }
             section { padding: 60px 5%; }
         }
     </style>
@@ -605,7 +586,7 @@
         <a href="#about" class="btn">Discover Our Mission</a>
     </section>
 
-    <!-- ABOUT / CONTEXT SECTION -->
+    <!-- ABOUT SECTION -->
     <section id="about">
         <h2 class="section-title">Project Context</h2>
         <div class="about-grid">
@@ -646,36 +627,40 @@
     <section id="partners" class="partners">
         <h2 class="section-title">Consortium Partners</h2>
         <div class="partners-grid">
-            <!-- Rize -->
+            <!-- Rize (Turkey) -->
             <div class="partner-card">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/10791245528279666244" alt="Rize" class="partner-img">
+                <!-- HTTPS Image: Rize/Nature -->
+                <img src="https://images.unsplash.com/photo-1629814484833-31714658049a?auto=format&fit=crop&w=800&q=80" alt="Rize" class="partner-img">
                 <div class="partner-info">
                     <span class="partner-country">Türkiye 🇹🇷</span>
                     <h4>Rize HKYM Vocational High School</h4>
                     <p>Project Coordinator</p>
                 </div>
             </div>
-            <!-- La Spezia -->
+            <!-- La Spezia (Italy) -->
             <div class="partner-card">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/13862117491681908541" alt="La Spezia" class="partner-img">
+                <!-- HTTPS Image: Italy Coast -->
+                <img src="https://images.unsplash.com/photo-1504198070170-4ca53bb1c1fa?auto=format&fit=crop&w=800&q=80" alt="La Spezia" class="partner-img">
                 <div class="partner-info">
                     <span class="partner-country">Italy 🇮🇹</span>
                     <h4>I.I.S. "Capellini Sauro"</h4>
                     <p>Partner Organization</p>
                 </div>
             </div>
-            <!-- Tallinn -->
+            <!-- Tallinn (Estonia) -->
             <div class="partner-card">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/1535784001610953063" alt="Tallinn" class="partner-img">
+                <!-- HTTPS Image: Tallinn -->
+                <img src="https://images.unsplash.com/photo-1535784001610-953063a87f54?auto=format&fit=crop&w=800&q=80" alt="Tallinn" class="partner-img">
                 <div class="partner-info">
                     <span class="partner-country">Estonia 🇪🇪</span>
                     <h4>Koolitus- ja arenguühing</h4>
                     <p>Expert Partner</p>
                 </div>
             </div>
-            <!-- Tarragona -->
+            <!-- Tarragona (Spain) -->
             <div class="partner-card">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/13444368413141903384" alt="Tarragona" class="partner-img">
+                <!-- Updated Image: L'Ametlla de Mar -->
+                <img src="https://infotur.scene7.com/is/image/cta/151126_maalv_4729" alt="L'Ametlla de Mar" class="partner-img">
                 <div class="partner-info">
                     <span class="partner-country">Spain 🇪🇸</span>
                     <h4>Escola Nauticopesquera</h4>
@@ -685,7 +670,7 @@
         </div>
     </section>
 
-    <!-- TARGET GROUPS SECTION -->
+    <!-- TARGET GROUPS -->
     <section id="targets">
         <h2 class="section-title">Who Is This For?</h2>
         <div class="target-layout">
@@ -698,12 +683,13 @@
                 </ul>
             </div>
             <div class="target-image">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/6237088877190090965" alt="Students in Classroom" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                <!-- HTTPS Image: Students -->
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" alt="Students in Classroom" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
             </div>
         </div>
     </section>
 
-    <!-- ROADMAP (TIMELINE) SECTION -->
+    <!-- ROADMAP -->
     <section id="roadmap" class="roadmap">
         <h2 class="section-title">Project Roadmap</h2>
         <div class="timeline-container">
@@ -730,7 +716,7 @@
         </div>
     </section>
 
-    <!-- DETAILED MOBILITIES SECTION -->
+    <!-- MOBILITIES -->
     <section id="mobilities" style="background-color: var(--white);">
         <h2 class="section-title">Mobility Activities</h2>
 
@@ -746,7 +732,8 @@
                     <li>Create infographics on top pollutants.</li>
                 </ul>
             </div>
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/13444368413141903384" alt="Port of Tarragona" class="mobility-img">
+            <!-- Updated Image: L'Ametlla de Mar -->
+            <img src="https://infotur.scene7.com/is/image/cta/151126_maalv_4729" alt="L'Ametlla de Mar" class="mobility-img">
         </div>
 
         <!-- Mobility 2 -->
@@ -761,7 +748,8 @@
                     <li>Digital data collection on marine fauna.</li>
                 </ul>
             </div>
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/5686854324530967737" alt="Aquaculture" class="mobility-img">
+            <!-- HTTPS Image: Italy Water -->
+            <img src="https://images.unsplash.com/photo-1504198070170-4ca53bb1c1fa?auto=format&fit=crop&w=800&q=80" alt="Aquaculture" class="mobility-img">
         </div>
 
         <!-- Mobility 3 -->
@@ -776,7 +764,8 @@
                     <li>Work on the third phase of the project textbook.</li>
                 </ul>
             </div>
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/10791245528279666244" alt="Black Sea Coast" class="mobility-img">
+            <!-- HTTPS Image: Black Sea -->
+            <img src="https://images.unsplash.com/photo-1629814484833-31714658049a?auto=format&fit=crop&w=800&q=80" alt="Black Sea Coast" class="mobility-img">
         </div>
 
         <!-- Mobility 4 -->
@@ -791,11 +780,12 @@
                     <li>Develop digital content on pollution prevention.</li>
                 </ul>
             </div>
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/1535784001610953063" alt="Tallinn Harbor" class="mobility-img">
+            <!-- HTTPS Image: Tallinn -->
+            <img src="https://images.unsplash.com/photo-1535784001610-953063a87f54?auto=format&fit=crop&w=800&q=80" alt="Tallinn Harbor" class="mobility-img">
         </div>
     </section>
 
-    <!-- EXPECTED RESULTS SECTION -->
+    <!-- EXPECTED RESULTS -->
     <section id="results" class="results">
         <h2 class="section-title">Expected Results</h2>
         <div class="results-grid">
@@ -804,7 +794,7 @@
                 <ul>
                     <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Comprehensive textbook on Marine Pollution.</li>
                     <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Integrated curriculum modules for VET schools.</li>
-                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Digital learning materials (infographics, videos).</li>
+                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Digital learning materials.</li>
                 </ul>
             </div>
             <div class="result-box">
@@ -812,18 +802,19 @@
                 <ul>
                     <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Increased environmental awareness (target: 35%).</li>
                     <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Enhanced digital and English language skills.</li>
-                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Establishment of a sustainable European maritime network.</li>
+                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Sustainable European maritime network.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- AI ASSISTANT SECTION (NEW) -->
+    <!-- AI ASSISTANT SECTION -->
     <section id="ai-assistant" class="ai-section">
         <h2 class="section-title">Ask the Marine AI Expert ✨</h2>
         <div class="ai-container">
             <div class="ai-icon"><i class="fas fa-robot"></i></div>
-            <p style="font-size: 1.1rem; color: #555;">Have questions about marine pollution or need a sustainability tip for your next maritime project? Ask our AI assistant powered by Gemini.</p>
+            <p style="font-size: 1.1rem; color: #555;">Have questions about marine pollution or need a sustainability tip for your next maritime project? Ask our AI assistant.</p>
+            <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">(Note: This feature requires a Gemini API Key to function fully)</p>
             
             <div class="ai-input-group">
                 <textarea id="userQuery" class="ai-input" placeholder="Example: What is marine mucilage? Or ask for a sustainable shipping tip..."></textarea>
@@ -852,16 +843,17 @@
         </div>
         <div class="erasmus-note">
             <i class="fas fa-flag-europe" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
-            <p>Co-funded by the Erasmus+ Programme of the European Union. The European Commission support for the production of this publication does not constitute an endorsement of the contents which reflects the views only of the authors, and the Commission cannot be held responsible for any use which may be made of the information contained therein.</p>
+            <p>Co-funded by the Erasmus+ Programme of the European Union.</p>
         </div>
     </footer>
 
     <!-- SCRIPT FOR AI LOGIC -->
     <script type="module">
-        // Import Firebase Functions (no auth required for simple API call in this context, but keeping imports standard)
-        // Note: For this demo we use direct fetch to Gemini as per instructions for simple text generation
-        
-        const apiKey = ""; // Provided by runtime environment
+        // ---------------------------------------------------------
+        // IMPORTANT: ADD YOUR GEMINI API KEY BELOW IF YOU HAVE ONE
+        // ---------------------------------------------------------
+        const apiKey = ""; // <--- Put your API key here (e.g., "AIzaSy...")
+
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
         const askBtn = document.getElementById('askBtn');
@@ -872,93 +864,55 @@
         const askLoader = document.getElementById('askLoader');
         const tipLoader = document.getElementById('tipLoader');
 
-        // System Prompt to guide the AI
-        const SYSTEM_PROMPT = `You are an expert marine biologist and environmental educator for the Erasmus+ MPMS project (Marine Pollution in Maritime Studies). 
-        Your goal is to educate students and teachers about marine pollution, sustainability in sea transport, and protecting marine ecosystems.
-        
-        Project Partners: Türkiye (Rize), Italy (La Spezia), Estonia (Tallinn), Spain (Tarragona).
-        Key Topics: Marine mucilage, industrial waste, port sustainability, digital monitoring.
-        
-        Guidelines:
-        - Keep answers concise, educational, and encouraging.
-        - Use simple English suitable for VET students.
-        - If asked about a random tip, provide a practical 'Green Shipping' or 'Ocean Protection' tip.
-        - Highlight the importance of international cooperation.`;
+        const SYSTEM_PROMPT = `You are an expert marine biologist for the Erasmus+ MPMS project. Keep answers concise and educational.`;
 
         async function callGemini(promptText) {
+            if (!apiKey) {
+                return "⚠️ AI Configuration Missing: The API Key is empty. Please open index.html code and add your Google Gemini API Key to line ~600 to make this feature work.";
+            }
+
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{
-                            parts: [{ text: promptText }]
-                        }],
-                        systemInstruction: {
-                            parts: [{ text: SYSTEM_PROMPT }]
-                        }
+                        contents: [{ parts: [{ text: promptText }] }],
+                        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
                     })
                 });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
+                if (!response.ok) throw new Error(\`HTTP error! status: \${response.status}\`);
                 const data = await response.json();
-                const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                return text || "Sorry, I couldn't generate an answer right now.";
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
             } catch (error) {
                 console.error("AI Error:", error);
-                return "There was an error connecting to the AI expert. Please try again later.";
+                return "Error connecting to AI service. Check console for details.";
             }
         }
 
-        // Handle Ask Question
         askBtn.addEventListener('click', async () => {
             const query = userQuery.value.trim();
-            if (!query) {
-                alert("Please type a question first!");
-                return;
-            }
-
-            // UI State
+            if (!query) { alert("Please type a question!"); return; }
             askBtn.disabled = true;
             askLoader.style.display = "inline-block";
             responseText.innerHTML = "Thinking...";
             responseArea.classList.add('visible');
-
-            // Call AI
             const answer = await callGemini(query);
-            
-            // Render Markdown-like text simply
             responseText.innerText = answer;
-            
-            // Reset UI
             askBtn.disabled = false;
             askLoader.style.display = "none";
         });
 
-        // Handle Get Eco-Tip
         tipBtn.addEventListener('click', async () => {
-            // UI State
             tipBtn.disabled = true;
             tipLoader.style.display = "inline-block";
             responseText.innerHTML = "Finding a tip...";
             responseArea.classList.add('visible');
-
-            // Call AI
-            const answer = await callGemini("Give me one short, practical eco-tip for students or sailors to reduce marine pollution.");
-            
-            // Render
+            const answer = await callGemini("Give me one short eco-tip for sailors.");
             responseText.innerText = answer;
-            
-            // Reset UI
             tipBtn.disabled = false;
             tipLoader.style.display = "none";
         });
-
     </script>
 
 </body>
