@@ -1,1 +1,965 @@
-# erasmus
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marine Pollution in Maritime Studies | MPMS</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --primary: #003366; /* Deep Navy */
+            --secondary: #008080; /* Teal */
+            --accent: #e2e8f0; /* Light Slate */
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --bg-light: #f8fafc;
+            --ai-bg: #e0f2f1; /* Light Teal for AI section */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: var(--secondary); /* Teal highlight */
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.6)), url('http://googleusercontent.com/image_collection/image_retrieval/12852909745041318275');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            max-width: 900px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            color: #e2e8f0;
+        }
+
+        .btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(0,128,128,0.4);
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #006666;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+
+        /* --- ABOUT (Context) --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--secondary);
+        }
+
+        .about-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* --- OBJECTIVES --- */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .objective-card {
+            background: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .obj-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        /* --- PARTNERS --- */
+        .partners {
+            background-color: var(--white);
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .partner-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .partner-img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .partner-info {
+            padding: 20px;
+        }
+
+        .partner-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .partner-country {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* --- TARGET GROUPS --- */
+        .target-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .target-list li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+            font-size: 1.1rem;
+        }
+
+        .target-list li::before {
+            content: '\f058'; /* FontAwesome check-circle */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        /* --- TIMELINE (ROADMAP) --- */
+        .roadmap {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .roadmap h2 {
+            color: var(--white);
+        }
+
+        .timeline-container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        /* Line connecting dots */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            z-index: 0;
+            display: none; /* Hidden on mobile by default, showed in query */
+        }
+
+        .timeline-box {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .timeline-date {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .timeline-loc {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* --- MOBILITIES (Detailed) --- */
+        .mobility-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+            align-items: center;
+        }
+        
+        .mobility-item.reverse {
+            direction: rtl; /* Simple way to swap columns visually */
+        }
+        
+        .mobility-item.reverse .mobility-text {
+            direction: ltr; /* Reset text direction */
+        }
+
+        .mobility-img {
+            height: 350px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .mobility-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .mobility-loc {
+            color: var(--secondary);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .mobility-text ul li {
+            margin-bottom: 10px;
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        /* --- RESULTS --- */
+        .results {
+            background-color: var(--bg-light);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .result-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            border-top: 4px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .result-box h3 {
+            margin-bottom: 20px;
+        }
+
+        /* --- AI SECTION STYLES --- */
+        .ai-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2f1 100%);
+            border-top: 1px solid #cbd5e1;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .ai-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 51, 102, 0.1);
+            text-align: center;
+        }
+
+        .ai-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .ai-input-group {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ai-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.3s;
+        }
+
+        .ai-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .ai-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-ai {
+            background: linear-gradient(135deg, var(--primary), #1a5c9e);
+            border: none;
+        }
+        
+        .btn-tip {
+            background: linear-gradient(135deg, var(--secondary), #20b2aa);
+            border: none;
+        }
+
+        .ai-response-area {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            min-height: 60px;
+            display: none; /* Hidden by default */
+        }
+        
+        .ai-response-area.visible {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .ai-response-header {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1e293b;
+            color: #cbd5e1;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .footer-info {
+            margin-bottom: 30px;
+        }
+        
+        .footer-info p {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+
+        .erasmus-note {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            max-width: 700px;
+            margin: 0 auto;
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (min-width: 992px) {
+            .timeline-container::before {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .about-grid, .target-layout, .mobility-item, .results-grid { grid-template-columns: 1fr; }
+            .mobility-item.reverse { direction: ltr; }
+            .nav-links { display: none; } /* Simplified mobile menu */
+            section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-anchor"></i>
+            MPMS PROJECT
+        </div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#objectives">Objectives</a>
+            <a href="#partners">Partners</a>
+            <a href="#roadmap">Roadmap</a>
+            <a href="#mobilities">Mobilities</a>
+            <a href="#results">Results</a>
+            <a href="#ai-assistant" style="color: #ffd700;">AI Expert ✨</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Marine Pollution in Maritime Studies</h1>
+        <p>Erasmus+ KA210-VET Strategic Partnership (2025-2027)</p>
+        <a href="#about" class="btn">Discover Our Mission</a>
+    </section>
+
+    <!-- ABOUT / CONTEXT SECTION -->
+    <section id="about">
+        <h2 class="section-title">Project Context</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3><i class="fas fa-water"></i> The Challenge</h3>
+                <p>Oceans sustain livelihoods and ecosystems but face critical threats from pollution. This project addresses the urgent need to integrate environmental sustainability into maritime education curricula to combat marine pollution effectively.</p>
+            </div>
+            <div class="about-card">
+                <h3><i class="fas fa-bullseye"></i> Our Approach</h3>
+                <p>As an Erasmus+ KA210-VET Small-scale partnership, we focus on equipping VET students and teachers with the skills to foster sustainable sea transportation and reduce the ecological footprint of the maritime sector.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- OBJECTIVES SECTION -->
+    <section id="objectives" style="background-color: var(--white);">
+        <h2 class="section-title">Key Objectives</h2>
+        <div class="objectives-grid">
+            <div class="objective-card">
+                <div class="obj-icon"><i class="fas fa-globe-europe"></i></div>
+                <h3>Environmental Awareness</h3>
+                <p>Educate on causes and effects of ocean pollution to foster a culture of sustainability.</p>
+            </div>
+            <div class="objective-card">
+                <div class="obj-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Digital & Language Skills</h3>
+                <p>Enhance competencies through CLIL methodology and digital collaboration tools.</p>
+            </div>
+            <div class="objective-card">
+                <div class="obj-icon"><i class="fas fa-handshake"></i></div>
+                <h3>International Cooperation</h3>
+                <p>Build a transnational network to share best practices and green strategies.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARTNERS SECTION -->
+    <section id="partners" class="partners">
+        <h2 class="section-title">Consortium Partners</h2>
+        <div class="partners-grid">
+            <!-- Rize -->
+            <div class="partner-card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/10791245528279666244" alt="Rize" class="partner-img">
+                <div class="partner-info">
+                    <span class="partner-country">Türkiye 🇹🇷</span>
+                    <h4>Rize HKYM Vocational High School</h4>
+                    <p>Project Coordinator</p>
+                </div>
+            </div>
+            <!-- La Spezia -->
+            <div class="partner-card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/13862117491681908541" alt="La Spezia" class="partner-img">
+                <div class="partner-info">
+                    <span class="partner-country">Italy 🇮🇹</span>
+                    <h4>I.I.S. "Capellini Sauro"</h4>
+                    <p>Partner Organization</p>
+                </div>
+            </div>
+            <!-- Tallinn -->
+            <div class="partner-card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/1535784001610953063" alt="Tallinn" class="partner-img">
+                <div class="partner-info">
+                    <span class="partner-country">Estonia 🇪🇪</span>
+                    <h4>Koolitus- ja arenguühing</h4>
+                    <p>Expert Partner</p>
+                </div>
+            </div>
+            <!-- Tarragona -->
+            <div class="partner-card">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/13444368413141903384" alt="Tarragona" class="partner-img">
+                <div class="partner-info">
+                    <span class="partner-country">Spain 🇪🇸</span>
+                    <h4>Escola Nauticopesquera</h4>
+                    <p>Partner Organization</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TARGET GROUPS SECTION -->
+    <section id="targets">
+        <h2 class="section-title">Who Is This For?</h2>
+        <div class="target-layout">
+            <div class="target-text">
+                <ul class="target-list">
+                    <li><strong>Maritime Students (15-18):</strong> Future seafarers needing environmental competence and digital skills.</li>
+                    <li><strong>VET Teachers:</strong> Educators requiring modern resources to teach sustainability in maritime contexts.</li>
+                    <li><strong>Maritime Professionals:</strong> Industry stakeholders seeking eco-friendly practices.</li>
+                    <li><strong>Local Communities:</strong> Families and citizens impacted by coastal pollution.</li>
+                </ul>
+            </div>
+            <div class="target-image">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/6237088877190090965" alt="Students in Classroom" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+            </div>
+        </div>
+    </section>
+
+    <!-- ROADMAP (TIMELINE) SECTION -->
+    <section id="roadmap" class="roadmap">
+        <h2 class="section-title">Project Roadmap</h2>
+        <div class="timeline-container">
+            <div class="timeline-box">
+                <span class="timeline-date">Feb 2026</span>
+                <span class="timeline-loc">Spain 🇪🇸</span>
+                <p>Reasons of Pollution</p>
+            </div>
+            <div class="timeline-box">
+                <span class="timeline-date">May 2026</span>
+                <span class="timeline-loc">Italy 🇮🇹</span>
+                <p>Effects on Species</p>
+            </div>
+            <div class="timeline-box">
+                <span class="timeline-date">Oct 2026</span>
+                <span class="timeline-loc">Turkey 🇹🇷</span>
+                <p>Results of Pollution</p>
+            </div>
+            <div class="timeline-box">
+                <span class="timeline-date">Dec 2026</span>
+                <span class="timeline-loc">Estonia 🇪🇪</span>
+                <p>Good Practices</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILED MOBILITIES SECTION -->
+    <section id="mobilities" style="background-color: var(--white);">
+        <h2 class="section-title">Mobility Activities</h2>
+
+        <!-- Mobility 1 -->
+        <div class="mobility-item">
+            <div class="mobility-text">
+                <h3>Mobility 1: Causes of Pollution</h3>
+                <span class="mobility-loc"><i class="fas fa-map-marker-alt"></i> Tarragona, Spain</span>
+                <p>Participants will analyze water pollution firsthand along the Mediterranean coast.</p>
+                <ul>
+                    <li>Visit the Port of Tarragona to observe waste management.</li>
+                    <li>Analyze impacts on maritime transport.</li>
+                    <li>Create infographics on top pollutants.</li>
+                </ul>
+            </div>
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/13444368413141903384" alt="Port of Tarragona" class="mobility-img">
+        </div>
+
+        <!-- Mobility 2 -->
+        <div class="mobility-item reverse">
+            <div class="mobility-text">
+                <h3>Mobility 2: Effects on Species</h3>
+                <span class="mobility-loc"><i class="fas fa-map-marker-alt"></i> La Spezia, Italy</span>
+                <p>Focusing on the impact of pollution on marine biodiversity in the Ligurian Sea.</p>
+                <ul>
+                    <li>Visit Smart Bay mussel farms to study aquaculture.</li>
+                    <li>Expert sessions on endangered species and mucilage.</li>
+                    <li>Digital data collection on marine fauna.</li>
+                </ul>
+            </div>
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/5686854324530967737" alt="Aquaculture" class="mobility-img">
+        </div>
+
+        <!-- Mobility 3 -->
+        <div class="mobility-item">
+            <div class="mobility-text">
+                <h3>Mobility 3: Results of Pollution</h3>
+                <span class="mobility-loc"><i class="fas fa-map-marker-alt"></i> Rize, Türkiye</span>
+                <p>Examining the semi-closed basin of the Black Sea.</p>
+                <ul>
+                    <li>Analyze industrial waste and microplastics.</li>
+                    <li>Study the effects of river discharge (Danube).</li>
+                    <li>Work on the third phase of the project textbook.</li>
+                </ul>
+            </div>
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/10791245528279666244" alt="Black Sea Coast" class="mobility-img">
+        </div>
+
+        <!-- Mobility 4 -->
+        <div class="mobility-item reverse">
+            <div class="mobility-text">
+                <h3>Mobility 4: Good Practices</h3>
+                <span class="mobility-loc"><i class="fas fa-map-marker-alt"></i> Tallinn, Estonia</span>
+                <p>Exploring innovative solutions and digital tools for water management.</p>
+                <ul>
+                    <li>Study smart water monitoring systems.</li>
+                    <li>Review ecological policies of the Baltic Sea.</li>
+                    <li>Develop digital content on pollution prevention.</li>
+                </ul>
+            </div>
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/1535784001610953063" alt="Tallinn Harbor" class="mobility-img">
+        </div>
+    </section>
+
+    <!-- EXPECTED RESULTS SECTION -->
+    <section id="results" class="results">
+        <h2 class="section-title">Expected Results</h2>
+        <div class="results-grid">
+            <div class="result-box">
+                <h3><i class="fas fa-book-open" style="color: var(--secondary); margin-right: 10px;"></i> Educational Outputs</h3>
+                <ul>
+                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Comprehensive textbook on Marine Pollution.</li>
+                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Integrated curriculum modules for VET schools.</li>
+                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Digital learning materials (infographics, videos).</li>
+                </ul>
+            </div>
+            <div class="result-box">
+                <h3><i class="fas fa-users" style="color: var(--secondary); margin-right: 10px;"></i> Social Impact</h3>
+                <ul>
+                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Increased environmental awareness (target: 35%).</li>
+                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Enhanced digital and English language skills.</li>
+                    <li><i class="fas fa-check" style="color: var(--secondary); margin-right: 8px;"></i> Establishment of a sustainable European maritime network.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI ASSISTANT SECTION (NEW) -->
+    <section id="ai-assistant" class="ai-section">
+        <h2 class="section-title">Ask the Marine AI Expert ✨</h2>
+        <div class="ai-container">
+            <div class="ai-icon"><i class="fas fa-robot"></i></div>
+            <p style="font-size: 1.1rem; color: #555;">Have questions about marine pollution or need a sustainability tip for your next maritime project? Ask our AI assistant powered by Gemini.</p>
+            
+            <div class="ai-input-group">
+                <textarea id="userQuery" class="ai-input" placeholder="Example: What is marine mucilage? Or ask for a sustainable shipping tip..."></textarea>
+                <div class="ai-actions">
+                    <button id="askBtn" class="btn btn-ai">
+                        Ask Question <div class="loader" id="askLoader"></div>
+                    </button>
+                    <button id="tipBtn" class="btn btn-tip">
+                        Get Eco-Tip <div class="loader" id="tipLoader"></div>
+                    </button>
+                </div>
+            </div>
+
+            <div id="aiResponse" class="ai-response-area">
+                <div class="ai-response-header"><i class="fas fa-sparkles"></i> AI Answer:</div>
+                <div id="aiResponseText"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-info">
+            <p><strong>Project Coordinator:</strong> Rize HKYM Vocational High School (Türkiye)</p>
+            <p><strong>Erasmus+ Project ID:</strong> KA210-VET-BE20AA55</p>
+        </div>
+        <div class="erasmus-note">
+            <i class="fas fa-flag-europe" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+            <p>Co-funded by the Erasmus+ Programme of the European Union. The European Commission support for the production of this publication does not constitute an endorsement of the contents which reflects the views only of the authors, and the Commission cannot be held responsible for any use which may be made of the information contained therein.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT FOR AI LOGIC -->
+    <script type="module">
+        // Import Firebase Functions (no auth required for simple API call in this context, but keeping imports standard)
+        // Note: For this demo we use direct fetch to Gemini as per instructions for simple text generation
+        
+        const apiKey = ""; // Provided by runtime environment
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        const askBtn = document.getElementById('askBtn');
+        const tipBtn = document.getElementById('tipBtn');
+        const userQuery = document.getElementById('userQuery');
+        const responseArea = document.getElementById('aiResponse');
+        const responseText = document.getElementById('aiResponseText');
+        const askLoader = document.getElementById('askLoader');
+        const tipLoader = document.getElementById('tipLoader');
+
+        // System Prompt to guide the AI
+        const SYSTEM_PROMPT = `You are an expert marine biologist and environmental educator for the Erasmus+ MPMS project (Marine Pollution in Maritime Studies). 
+        Your goal is to educate students and teachers about marine pollution, sustainability in sea transport, and protecting marine ecosystems.
+        
+        Project Partners: Türkiye (Rize), Italy (La Spezia), Estonia (Tallinn), Spain (Tarragona).
+        Key Topics: Marine mucilage, industrial waste, port sustainability, digital monitoring.
+        
+        Guidelines:
+        - Keep answers concise, educational, and encouraging.
+        - Use simple English suitable for VET students.
+        - If asked about a random tip, provide a practical 'Green Shipping' or 'Ocean Protection' tip.
+        - Highlight the importance of international cooperation.`;
+
+        async function callGemini(promptText) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: promptText }]
+                        }],
+                        systemInstruction: {
+                            parts: [{ text: SYSTEM_PROMPT }]
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                return text || "Sorry, I couldn't generate an answer right now.";
+            } catch (error) {
+                console.error("AI Error:", error);
+                return "There was an error connecting to the AI expert. Please try again later.";
+            }
+        }
+
+        // Handle Ask Question
+        askBtn.addEventListener('click', async () => {
+            const query = userQuery.value.trim();
+            if (!query) {
+                alert("Please type a question first!");
+                return;
+            }
+
+            // UI State
+            askBtn.disabled = true;
+            askLoader.style.display = "inline-block";
+            responseText.innerHTML = "Thinking...";
+            responseArea.classList.add('visible');
+
+            // Call AI
+            const answer = await callGemini(query);
+            
+            // Render Markdown-like text simply
+            responseText.innerText = answer;
+            
+            // Reset UI
+            askBtn.disabled = false;
+            askLoader.style.display = "none";
+        });
+
+        // Handle Get Eco-Tip
+        tipBtn.addEventListener('click', async () => {
+            // UI State
+            tipBtn.disabled = true;
+            tipLoader.style.display = "inline-block";
+            responseText.innerHTML = "Finding a tip...";
+            responseArea.classList.add('visible');
+
+            // Call AI
+            const answer = await callGemini("Give me one short, practical eco-tip for students or sailors to reduce marine pollution.");
+            
+            // Render
+            responseText.innerText = answer;
+            
+            // Reset UI
+            tipBtn.disabled = false;
+            tipLoader.style.display = "none";
+        });
+
+    </script>
+
+</body>
+</html># erasmus
