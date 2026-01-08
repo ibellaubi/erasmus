@@ -963,10 +963,15 @@
 
     <!-- SCRIPT FOR AI LOGIC -->
     <script type="module">
-        // ---------------------------------------------------------
-        // IMPORTANT: ADD YOUR GEMINI API KEY BELOW IF YOU HAVE ONE
-        // ---------------------------------------------------------
-        const apiKey = ""; // <--- Put your API key here (e.g., "AIzaSy...")
+        /* ------------------------------------------------------------------
+           🟢 CONFIGURATION: GOOGLE GEMINI API KEY
+           ------------------------------------------------------------------
+           1. Go to: https://aistudio.google.com/app/apikey
+           2. Create a new API key.
+           3. Paste it inside the quotes below.
+           ------------------------------------------------------------------
+        */
+        const apiKey = "AIzaSyDOCKiZXF6H_WIJu17_ZcsH9GoUGjLZy_M"; // PASTE_YOUR_API_KEY_HERE
 
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
