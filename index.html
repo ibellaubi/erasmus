@@ -512,15 +512,22 @@
             animation: fadeIn 0.5s ease;
         }
 
+        .ai-response-area.error {
+            border-color: #ef4444;
+            background-color: #fef2f2;
+            color: #b91c1c;
+        }
+
         .ai-response-header {
             font-weight: bold;
             color: var(--primary);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 10px;
+        .result-box h3 {
+            margin-bottom: 20px;
         }
-        
+
         /* --- INSTAGRAM SECTION --- */
         .instagram-section {
             background-color: var(--white);
@@ -656,7 +663,6 @@
             <a href="#mobilities">Mobilities</a>
             <a href="#results">Results</a>
             <a href="#instagram">Social</a>
-            <a href="#ai-assistant" style="color: #ffd700;">AI Expert ✨</a>
         </div>
     </nav>
 
@@ -888,33 +894,6 @@
             </div>
         </div>
     </section>
-
-    <!-- AI ASSISTANT SECTION -->
-    <section id="ai-assistant" class="ai-section">
-        <h2 class="section-title">Ask the Marine AI Expert ✨</h2>
-        <div class="ai-container">
-            <div class="ai-icon"><i class="fas fa-robot"></i></div>
-            <p style="font-size: 1.1rem; color: #555;">Have questions about marine pollution or need a sustainability tip for your next maritime project? Ask our AI assistant.</p>
-            <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">(Note: This feature requires a Gemini API Key to function fully)</p>
-            
-            <div class="ai-input-group">
-                <textarea id="userQuery" class="ai-input" placeholder="Example: What is marine mucilage? Or ask for a sustainable shipping tip..."></textarea>
-                <div class="ai-actions">
-                    <button id="askBtn" class="btn btn-ai">
-                        Ask Question <div class="loader" id="askLoader"></div>
-                    </button>
-                    <button id="tipBtn" class="btn btn-tip">
-                        Get Eco-Tip <div class="loader" id="tipLoader"></div>
-                    </button>
-                </div>
-            </div>
-
-            <div id="aiResponse" class="ai-response-area">
-                <div class="ai-response-header"><i class="fas fa-sparkles"></i> AI Answer:</div>
-                <div id="aiResponseText"></div>
-            </div>
-        </div>
-    </section>
     
     <!-- INSTAGRAM SECTION -->
     <section id="instagram" class="instagram-section">
@@ -960,79 +939,6 @@
             <p>Co-funded by the Erasmus+ Programme of the European Union.</p>
         </div>
     </footer>
-
-    <!-- SCRIPT FOR AI LOGIC -->
-    <script type="module">
-        /* ------------------------------------------------------------------
-           🟢 CONFIGURATION: GOOGLE GEMINI API KEY
-           ------------------------------------------------------------------
-           1. Go to: https://aistudio.google.com/app/apikey
-           2. Create a new API key.
-           3. Paste it inside the quotes below.
-           ------------------------------------------------------------------
-        */
-        const apiKey = "AIzaSyDOCKiZXF6H_WIJu17_ZcsH9GoUGjLZy_M"; // PASTE_YOUR_API_KEY_HERE
-
-        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-        const askBtn = document.getElementById('askBtn');
-        const tipBtn = document.getElementById('tipBtn');
-        const userQuery = document.getElementById('userQuery');
-        const responseArea = document.getElementById('aiResponse');
-        const responseText = document.getElementById('aiResponseText');
-        const askLoader = document.getElementById('askLoader');
-        const tipLoader = document.getElementById('tipLoader');
-
-        const SYSTEM_PROMPT = `You are an expert marine biologist for the Erasmus+ MPMS project. Keep answers concise and educational.`;
-
-        async function callGemini(promptText) {
-            if (!apiKey) {
-                return "⚠️ AI Configuration Missing: The API Key is empty. Please open index.html code and add your Google Gemini API Key to line ~600 to make this feature work.";
-            }
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: promptText }] }],
-                        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
-                    })
-                });
-
-                if (!response.ok) throw new Error(\`HTTP error! status: \${response.status}\`);
-                const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
-            } catch (error) {
-                console.error("AI Error:", error);
-                return "Error connecting to AI service. Check console for details.";
-            }
-        }
-
-        askBtn.addEventListener('click', async () => {
-            const query = userQuery.value.trim();
-            if (!query) { alert("Please type a question!"); return; }
-            askBtn.disabled = true;
-            askLoader.style.display = "inline-block";
-            responseText.innerHTML = "Thinking...";
-            responseArea.classList.add('visible');
-            const answer = await callGemini(query);
-            responseText.innerText = answer;
-            askBtn.disabled = false;
-            askLoader.style.display = "none";
-        });
-
-        tipBtn.addEventListener('click', async () => {
-            tipBtn.disabled = true;
-            tipLoader.style.display = "inline-block";
-            responseText.innerHTML = "Finding a tip...";
-            responseArea.classList.add('visible');
-            const answer = await callGemini("Give me one short eco-tip for sailors.");
-            responseText.innerText = answer;
-            tipBtn.disabled = false;
-            tipLoader.style.display = "none";
-        });
-    </script>
 
 </body>
 </html>
