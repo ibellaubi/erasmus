@@ -524,10 +524,9 @@
             margin-bottom: 10px;
             display: flex;
             align-items: center;
-        .result-box h3 {
-            margin-bottom: 20px;
+            gap: 10px;
         }
-
+        
         /* --- INSTAGRAM SECTION --- */
         .instagram-section {
             background-color: var(--white);
@@ -546,9 +545,12 @@
         
         .insta-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(4, 1fr); /* Force 4 columns on desktop for cleaner look */
+            gap: 20px; /* Increase gap slightly */
+            margin-bottom: 40px;
+            max-width: 900px; /* Constrain width */
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .insta-post {
@@ -638,12 +640,25 @@
             .timeline-container::before { display: block; }
         }
 
+        @media (max-width: 900px) {
+            .insta-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2x2 on tablets */
+                max-width: 500px;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.2rem; }
             .about-grid, .target-layout, .mobility-item, .results-grid { grid-template-columns: 1fr; }
             .mobility-item.reverse { direction: ltr; }
             .nav-links { display: none; }
             section { padding: 60px 5%; }
+        }
+        
+        @media (max-width: 480px) {
+            .insta-grid {
+                grid-template-columns: 1fr; /* Stack on mobile */
+            }
         }
     </style>
 </head>
@@ -663,6 +678,7 @@
             <a href="#mobilities">Mobilities</a>
             <a href="#results">Results</a>
             <a href="#instagram">Social</a>
+            <a href="#ai-assistant" style="color: #ffd700;">AI Expert ✨</a>
         </div>
     </nav>
 
@@ -894,6 +910,33 @@
             </div>
         </div>
     </section>
+
+    <!-- AI ASSISTANT SECTION -->
+    <section id="ai-assistant" class="ai-section">
+        <h2 class="section-title">Ask the Marine AI Expert ✨</h2>
+        <div class="ai-container">
+            <div class="ai-icon"><i class="fas fa-robot"></i></div>
+            <p style="font-size: 1.1rem; color: #555;">Have questions about marine pollution or need a sustainability tip for your next maritime project? Ask our AI assistant.</p>
+            <p style="font-size: 0.9rem; color: #888; margin-top: 5px;">(Note: This feature requires a Gemini API Key to function fully)</p>
+            
+            <div class="ai-input-group">
+                <textarea id="userQuery" class="ai-input" placeholder="Example: What is marine mucilage? Or ask for a sustainable shipping tip..."></textarea>
+                <div class="ai-actions">
+                    <button id="askBtn" class="btn btn-ai">
+                        Ask Question <div class="loader" id="askLoader"></div>
+                    </button>
+                    <button id="tipBtn" class="btn btn-tip">
+                        Get Eco-Tip <div class="loader" id="tipLoader"></div>
+                    </button>
+                </div>
+            </div>
+
+            <div id="aiResponse" class="ai-response-area">
+                <div class="ai-response-header"><i class="fas fa-sparkles"></i> AI Answer:</div>
+                <div id="aiResponseText"></div>
+            </div>
+        </div>
+    </section>
     
     <!-- INSTAGRAM SECTION -->
     <section id="instagram" class="instagram-section">
@@ -939,6 +982,95 @@
             <p>Co-funded by the Erasmus+ Programme of the European Union.</p>
         </div>
     </footer>
+
+    <!-- SCRIPT FOR AI LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const apiKey = "AIzaSyDOCKiZXF6H_WIJu17_ZcsH9GoUGjLZy_M".trim(); // Clean key
+            const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+            const askBtn = document.getElementById('askBtn');
+            const tipBtn = document.getElementById('tipBtn');
+            const userQuery = document.getElementById('userQuery');
+            const responseArea = document.getElementById('aiResponse');
+            const responseText = document.getElementById('aiResponseText');
+            const askLoader = document.getElementById('askLoader');
+            const tipLoader = document.getElementById('tipLoader');
+
+            const SYSTEM_PROMPT = `You are an expert marine biologist for the Erasmus+ MPMS project. Keep answers concise and educational.`;
+
+            async function callGemini(promptText) {
+                if (!apiKey) {
+                    return "⚠️ Error: API Key is missing in code.";
+                }
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: promptText + " " + SYSTEM_PROMPT }] }]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const errorBody = await response.text();
+                        console.error("API Error details:", errorBody);
+                        let msg = `HTTP Error ${response.status}`;
+                        try {
+                            const errJson = JSON.parse(errorBody);
+                            if (errJson.error && errJson.error.message) msg += `: ${errJson.error.message}`;
+                        } catch(e){}
+                        throw new Error(msg);
+                    }
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+                } catch (error) {
+                    console.error("AI Error:", error);
+                    return `⚠️ Connection Error: ${error.message}`;
+                }
+            }
+
+            askBtn.addEventListener('click', async () => {
+                const query = userQuery.value.trim();
+                if (!query) { alert("Please type a question!"); return; }
+                
+                askBtn.disabled = true;
+                askLoader.style.display = "inline-block";
+                responseText.innerHTML = "Thinking...";
+                responseArea.classList.remove('error');
+                responseArea.classList.add('visible');
+                
+                const answer = await callGemini(query);
+                
+                if (answer.startsWith("⚠️")) {
+                     responseArea.classList.add('error');
+                }
+                
+                responseText.innerText = answer;
+                askBtn.disabled = false;
+                askLoader.style.display = "none";
+            });
+
+            tipBtn.addEventListener('click', async () => {
+                tipBtn.disabled = true;
+                tipLoader.style.display = "inline-block";
+                responseText.innerHTML = "Finding a tip...";
+                responseArea.classList.remove('error');
+                responseArea.classList.add('visible');
+                
+                const answer = await callGemini("Give me one short eco-tip for sailors.");
+                
+                if (answer.startsWith("⚠️")) {
+                     responseArea.classList.add('error');
+                }
+
+                responseText.innerText = answer;
+                tipBtn.disabled = false;
+                tipLoader.style.display = "none";
+            });
+        });
+    </script>
 
 </body>
 </html>
